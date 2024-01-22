@@ -18,11 +18,7 @@ namespace JogoGourmet
             TryToGuessDish();
             AskWhatDishUserThought();
             AskUserToCompleteSentence();
-            var userWantsToPlayAgain = AskIfUserWantsToPlayAgain();
-            if (userWantsToPlayAgain)
-            {
-                RestartGame();
-            }
+            CheckIfUserWantsToContinuePlaying();
         }
         public void RestartGame()
         {
@@ -37,6 +33,16 @@ namespace JogoGourmet
             Console.WriteLine("Pressione ENTER para continuar");
             Console.ReadLine();
         }
+
+        private void CheckIfUserWantsToContinuePlaying()
+        {
+            var userWantsToContinuePlaying = AskIfUserWantsToPlayAgain();
+            if (userWantsToContinuePlaying)
+            {
+                RestartGame();
+            }
+            Environment.Exit(0);
+        }
         private void TryToGuessDish()
         {
             foreach (var dish in _availableDishes)
@@ -44,11 +50,7 @@ namespace JogoGourmet
                 var dishIsWhatUserThought = AskIfDishIs(dish);
                 if (dishIsWhatUserThought)
                 {
-                    var userWantsToPlayAgain = AskIfUserWantsToPlayAgain();
-                    if (userWantsToPlayAgain)
-                    {
-                        RestartGame();
-                    }
+                    CheckIfUserWantsToContinuePlaying();
                 }
             }
         }
