@@ -5,11 +5,7 @@ namespace JogoGourmet
     {
         private static List<string> _availableDishes = new List<string> { "Lasanha", "Massa", "Bolo de Chocolate" };
         public ReadOnlyCollection<string> AvailableDishes => _availableDishes.AsReadOnly();
-        private int _numberOfHits = 0;
-        private int _numberOfMisses = 0;
         private string _dishUserThought = string.Empty;
-        private void IncrementNumberOfHits() => _numberOfHits++;
-        private void IncrementNumberOfMisses() => _numberOfMisses++;
 
         public void Start()
         {
@@ -22,8 +18,6 @@ namespace JogoGourmet
         }
         public void RestartGame()
         {
-            _numberOfHits = 0;
-            _numberOfMisses = 0;
             _dishUserThought = string.Empty;
             Start();
         }
@@ -33,7 +27,6 @@ namespace JogoGourmet
             Console.WriteLine("Pressione ENTER para continuar");
             Console.ReadLine();
         }
-
         private void CheckIfUserWantsToContinuePlaying()
         {
             var userWantsToContinuePlaying = AskIfUserWantsToPlayAgain();
@@ -83,11 +76,9 @@ namespace JogoGourmet
                 switch (answer)
                 {
                     case "S":
-                        IncrementNumberOfHits();
                         Console.WriteLine("Acertei de novo! :D");
                         return true;
                     case "N":
-                        IncrementNumberOfMisses();
                         return false;
                     default:
                         Console.WriteLine("Resposta inválida");
